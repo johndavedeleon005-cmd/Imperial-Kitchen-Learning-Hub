@@ -10,6 +10,7 @@ import { AudioReaderPanel } from './components/AudioReaderPanel';
 import { StaffQuizAudit } from './components/StaffQuizAudit';
 import { AddDocumentModal } from './components/AddDocumentModal';
 import { ComplianceAssistantModal } from './components/ComplianceAssistantModal';
+import { ComplianceAssistantView } from './components/ComplianceAssistantView';
 import { PdfViewerModal } from './components/PdfViewerModal';
 import {
   Search,
@@ -485,28 +486,13 @@ export default function App() {
 
               {/* TAB 5: AI COMPLIANCE ASSISTANT */}
               {activeTab === 'assistant' && (
-                <div className="bg-slate-900 border border-slate-800 rounded-3xl p-4 sm:p-5 space-y-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-red-600 to-amber-600 flex items-center justify-center shadow-lg shadow-red-950/50">
-                      <Sparkles className="w-5 h-5 text-white" />
-                    </div>
-                    <div>
-                      <h2 className="text-base font-black text-white">
-                        AI Food Safety Intelligence Officer
-                      </h2>
-                      <p className="text-xs text-slate-400">
-                        Ask operational compliance questions grounded in company policies
-                      </p>
-                    </div>
-                  </div>
-                  <button
-                    onClick={() => setIsAssistantOpen(true)}
-                    className="w-full py-3 px-4 rounded-2xl bg-red-600 hover:bg-red-500 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-lg shadow-red-950/60 active:scale-95 transition-all"
-                  >
-                    <Sparkles className="w-4 h-4" />
-                    <span>Launch AI Compliance Q&A Assistant</span>
-                  </button>
-                </div>
+                <ComplianceAssistantView
+                  activeDoc={selectedDoc}
+                  onOpenDoc={(id) => {
+                    const found = documents.find((d) => d.id === id);
+                    if (found) setSelectedDoc(found);
+                  }}
+                />
               )}
             </div>
           )}
